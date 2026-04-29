@@ -11,3 +11,6 @@ wheels/
 
 # Candidate harness output for local testing
 .claude-candidate/
+
+# Per-developer Claude Code state
+.claude/settings.local.json
