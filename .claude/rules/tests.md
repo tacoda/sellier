@@ -1,12 +1,12 @@
 ---
-description: Test patterns and TDD workflow for [PROJECT_NAME]
+description: Test patterns and TDD workflow for sellier
 paths:
-  - "[TEST_PATHS]"
+  - "tests/**/*.py"
 ---
 
 # Tests
 
-Tests are the primary quality gate. Every change must pass `[LINT_COMMAND]` and `[TEST_COMMAND]` before commit.
+Tests are the primary quality gate. Every change must pass `uv run ruff check` and `uv run pytest` before commit.
 
 ## Philosophy
 
@@ -54,4 +54,4 @@ Structure every test with clear separation. One logical assertion per test.
 
 ## Project-Specific Test Setup
 
-[TEST_SETUP_NOTES]
+Run with `uv run pytest`. Tests live in `tests/`. The scaffolder suite asserts byte-equality between `src/sellier/templates/` and what `sellier init` writes — adding a template file is automatically covered by existing tests. CLI tests use typer's `CliRunner`.

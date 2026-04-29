@@ -1,5 +1,5 @@
 ---
-description: OWASP Top 10 mapped to [PROJECT_NAME]
+description: OWASP Top 10 mapped to sellier
 ---
 
 # Security
@@ -29,9 +29,9 @@ Security review is required when a change touches: authentication, authorization
 
 ## Dependencies
 - Pin dependency versions
-- Run dependency audit (`[DEPENDENCY_AUDIT_COMMAND]`) regularly
+- Run dependency audit (`TODO`) regularly
 - Update on a cadence; security patches promptly
 
 ## Project-Specific Security Notes
 
-[SECURITY_NOTES]
+This CLI writes files into a user-supplied path. Validate paths against the resolved target project root and refuse to follow symlinks that escape it. No network calls, no auth, no DB — most OWASP categories don't apply directly, so injection rules above translate to: never concatenate user input into shell commands or paths.

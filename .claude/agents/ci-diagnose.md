@@ -1,5 +1,5 @@
 ---
-description: Diagnose a failing CI run on [CI_PROVIDER] and propose fixes
+description: Diagnose a failing CI run and propose fixes (no CI is configured for sellier yet)
 allowed_tools:
   - Read
   - Grep
@@ -8,7 +8,9 @@ allowed_tools:
   - "Bash(git *)"
 ---
 
-Diagnose the most recent failing CI run for the current branch on [CI_PROVIDER]. Read-only.
+Diagnose the most recent failing CI run for the current branch. Read-only.
+
+> **Note:** sellier has no CI provider configured yet. This agent is a placeholder — once CI is wired up, fill in the provider-specific commands below.
 
 ## Steps
 

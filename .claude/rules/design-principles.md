@@ -1,5 +1,5 @@
 ---
-description: Core design principles governing all code in [PROJECT_NAME]
+description: Core design principles governing all code in sellier
 ---
 
 # Design Principles
@@ -43,4 +43,6 @@ Tell objects what to do instead of querying their state and deciding for them. E
 
 ## Project-Specific Patterns
 
-[PROJECT_PATTERNS]
+- The `src/sellier/templates/` tree **is** the product. Keep `cli.py` and `scaffolder.py` thin — most of the value is in the markdown templates.
+- Every project-specific value in templates is a `[PLACEHOLDER]` token (uppercase letters, digits, underscores in square brackets). The `/saddle-up` command grep-finds and replaces them.
+- Scaffolder tests assert byte-equality between `src/sellier/templates/` and what `sellier init` writes. Adding a template file means the tests pick it up automatically — no test changes required.

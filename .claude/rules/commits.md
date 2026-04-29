@@ -1,5 +1,5 @@
 ---
-description: Commit and pull request rules for [PROJECT_NAME]
+description: Commit and pull request rules for sellier
 ---
 
 # Commits & Pull Requests
@@ -19,17 +19,17 @@ Common types:
 ## Rules
 
 - One logical change per commit. Separate **structural** (refactor) and **behavioral** (feat/fix) changes into different commits.
-- The codebase stays releasable on `[MAIN_BRANCH]` at all times. Use feature flags to decouple deploy from release.
+- The codebase stays releasable on `main` at all times. Use feature flags to decouple deploy from release.
 - Pre-commit checks must pass before commit. CI is a backstop, not a substitute.
 - Do **not** add co-authors to commit messages.
-- Do **not** mention the AI agent in commit messages, PR descriptions, or [TASK_TRACKER] tickets.
+- Do **not** mention the AI agent in commit messages or PR descriptions.
 
 ## Pull Requests
 
 - Title is short (under 70 characters); details go in the body.
-- Body links to the [TASK_TRACKER] ticket and explains the **why**.
+- Body explains the **why**.
 - Include a test plan when the change touches user-facing behavior.
 
 ## Project-Specific Notes
 
-[COMMIT_NOTES]
+Releases are cut from `main`: bump the version in `src/sellier/__init__.py` and `pyproject.toml` together in a single `chore(release):` commit, then `uv build` and `uv publish`.

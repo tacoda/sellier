@@ -1,20 +1,29 @@
 # CLAUDE.md
 
-Guidance for Claude Code when working in **[PROJECT_NAME]**.
+Guidance for Claude Code when working in **sellier**.
 
 ## Project Overview
 
-[PROJECT_DESCRIPTION]
+A Python CLI that scaffolds a Claude Code agent harness into any project. The `templates/` tree is the deliverable; `cli.py` and `scaffolder.py` are thin wrappers around copying it.
 
-**Tech Stack:** [TECH_STACK]
+**Tech Stack:** Python 3.14, uv, typer, pytest, hatchling
 
-**Main branch:** `[MAIN_BRANCH]`
-**Task tracker:** [TASK_TRACKER]
-**CI:** [CI_PROVIDER]
+**Main branch:** `main`
+**Task tracker:** None
+**CI:** None yet
 
 ## Layout
 
-[PROJECT_LAYOUT]
+```
+src/sellier/
+├── __init__.py        # version
+├── cli.py             # typer app — init / list / version
+├── scaffolder.py      # template traversal & copy
+└── templates/         # the harness, shipped as package data
+tests/
+├── test_cli.py        # typer CliRunner tests
+└── test_scaffolder.py # scaffolder logic tests
+```
 
 ---
 
@@ -23,7 +32,7 @@ Guidance for Claude Code when working in **[PROJECT_NAME]**.
 The harness is the system that lets an AI agent produce correct, high-quality code consistently. It has four parts plus the discipline that makes them work.
 
 1. **Guidance** — `CLAUDE.md` (this file) and `.claude/rules/`. Path-scoped rules auto-load when touching matching files. These shape what the agent writes before it writes a single line.
-2. **Guardrails** — automated checks (`[LINT_COMMAND]`, `[TEST_COMMAND]`, `[FRONTEND_TEST_COMMAND]`, `[BUILD_COMMAND]`). The agent runs them; it does not bypass them.
+2. **Guardrails** — automated checks (`uv run ruff check`, `uv run pytest`, `uv build`). The agent runs them; it does not bypass them.
 3. **Flywheel** — the feedback loop. When a reviewer flags a pattern, update the relevant rule file in `.claude/rules/`, reload it, then re-apply. Every review improves every future conversation.
 4. **Executable Workflows** — `.claude/agents/` for isolated read-only analysis, `.claude/commands/` for single-step utilities, `.claude/skills/` for multi-phase workflows.
 
@@ -39,10 +48,9 @@ The harness is only as strong as the code it governs. Write new code to harness 
 ## Commands
 
 ```
-[LINT_COMMAND]            # static checks
-[TEST_COMMAND]            # full test suite
-[FRONTEND_TEST_COMMAND]   # frontend tests (omit if N/A)
-[BUILD_COMMAND]           # build / compile
+uv run ruff check         # static checks
+uv run pytest             # full test suite
+uv build                  # build / compile
 ```
 
 ## Change Approval Flow
