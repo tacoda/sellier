@@ -11,6 +11,8 @@ A **harness** is the system that lets an AI coding agent produce correct, high-q
 
 `sellier` ships a generic, slim version of all four. You run it once in your project, then run a single Claude command (`/saddle-up`) to fill in placeholders with project specifics.
 
+Read the [blog post](https://dev.to/tacoda/building-a-harness-how-we-standardized-agentic-coding-in-a-real-codebase-4oab) that inspired this tool.
+
 ## Status
 
 Pre-publication. Install from the repo until the first release on PyPI.
