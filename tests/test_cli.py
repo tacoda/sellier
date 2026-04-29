@@ -46,3 +46,11 @@ def test_help_renders() -> None:
 
     assert result.exit_code == 0
     assert "init" in result.output
+
+
+def test_init_dup_writes_to_claude_candidate(tmp_path: Path) -> None:
+    result = runner.invoke(app, ["init", str(tmp_path), "--dup"])
+
+    assert result.exit_code == 0, result.output
+    assert (tmp_path / ".claude-candidate" / "settings.json").is_file()
+    assert not (tmp_path / ".claude").exists()
