@@ -99,7 +99,7 @@ Every project-specific value in the harness is a `[PLACEHOLDER]` token — upper
 | `[FRONTEND_TEST_COMMAND]` | "pnpm test:ui" |
 | `[BUILD_COMMAND]` | "pnpm build" |
 
-You can edit the harness afterwards. `sellier` writes; it does not own the files.
+You can edit the harness afterwards. `sellier` writes; it does not own the files - _you_ do.
 
 ---
 
