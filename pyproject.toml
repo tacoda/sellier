@@ -1,6 +1,6 @@
 [project]
 name = "sellier"
-version = "0.1.0"
+version = "0.1.1"
 description = "Scaffold a Claude Code agent harness into any project"
 readme = "README.md"
 requires-python = ">=3.14"
