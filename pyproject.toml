@@ -36,6 +36,13 @@ dev = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.hatch.build]
+exclude = [
+    ".env",
+    ".env.*",
+    "/dist",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/sellier"]
 
