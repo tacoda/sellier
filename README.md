@@ -13,37 +13,36 @@ A **harness** is the system that lets an AI coding agent produce correct, high-q
 
 Read the [blog post](https://dev.to/tacoda/building-a-harness-how-we-standardized-agentic-coding-in-a-real-codebase-4oab) that inspired this tool.
 
-## Status
+## Quick start
 
-Pre-publication. Install from the repo until the first release on PyPI.
-
----
-
-## For consumers
-
-### Install
-
-> Once published:
-> ```
-> uv tool install sellier
-> ```
-
-Until then, install from a local clone:
+Four steps from zero to a project-aware harness:
 
 ```
-git clone https://github.com/tacoda/sellier.git
-uv tool install ./sellier
-```
+# 1. Install
+pip install sellier
 
-### Use
-
-In the root of any project:
-
-```
+# 2. Scaffold the harness into your project
+cd /path/to/your/project
 sellier init
 ```
 
-This writes:
+Then open the project in Claude Code and run:
+
+```
+# 3. Customize the harness for this project
+/saddle-up
+
+# 4. Audit the codebase against the harness standards
+/giddy-up
+```
+
+`/saddle-up` reads your repo (package files, build config, README, branch state) and proposes values for every `[PLACEHOLDER]` in the harness. You confirm or correct, and Claude rewrites the files.
+
+`/giddy-up` walks the codebase looking for violations of the rules in `.claude/rules/` and reports findings in a single table. It is read-only — you decide what to fix.
+
+---
+
+## What `sellier init` writes
 
 ```
 CLAUDE.md
@@ -56,6 +55,7 @@ CLAUDE.md
 │   ├── review-security.md
 │   └── self-review.md
 ├── commands/
+│   ├── giddy-up.md
 │   ├── pre-commit.md
 │   └── saddle-up.md
 ├── rules/
@@ -67,20 +67,21 @@ CLAUDE.md
     └── implement-change/SKILL.md
 ```
 
-Open the project in Claude Code and run:
+## CLI reference
 
 ```
-/saddle-up
-```
-
-That command reads your repo (package files, build config, README, branch state) and proposes values for every `[PLACEHOLDER]` in the harness. You confirm or correct, and Claude rewrites the files.
-
-### Other commands
-
-```
-sellier init [PATH]    # default: current directory; --force to overwrite
+sellier init [PATH]    # default: current directory
+                       #   --force, -f   overwrite existing harness files in place
+                       #   --clean       remove existing .claude/ before writing
 sellier version        # print installed version
 sellier --help
+```
+
+### Alternative installs
+
+```
+uv tool install sellier         # if you use uv
+pipx install sellier            # isolated install via pipx
 ```
 
 ### Placeholder syntax
@@ -119,7 +120,7 @@ You can edit the harness afterwards. `sellier` writes; it does not own the files
 ```
 src/sellier/
 ├── __init__.py          # version
-├── cli.py               # typer app — init / list / version
+├── cli.py               # typer app — init / version
 ├── scaffolder.py        # template traversal and copy logic
 └── templates/           # the harness, shipped as package data
     ├── CLAUDE.md
@@ -159,14 +160,14 @@ uv run pytest -k init                      # one keyword
 
 The scaffolder tests assert byte-equality between the templates shipped in the package and what `init` writes — if you add a binary asset, the test still applies.
 
-### Release (future)
+### Release
+
+Bump the version in `pyproject.toml` and `src/sellier/__init__.py` together in a single `chore(release):` commit, then:
 
 ```
 uv build
 uv publish
 ```
-
-The wheel includes `templates/` via the `force-include` block in `pyproject.toml`.
 
 ---
 
