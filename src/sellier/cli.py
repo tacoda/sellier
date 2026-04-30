@@ -9,7 +9,6 @@ import typer
 from sellier import __version__
 from sellier.scaffolder import (
     HarnessAlreadyExistsError,
-    iter_template_files,
     scaffold_harness,
 )
 
@@ -47,13 +46,6 @@ def init(
 
     typer.echo(f"Wrote {len(written)} file(s) to {target}.")
     typer.echo("Next: open the project in Claude Code and run `/saddle-up`.")
-
-
-@app.command(name="list")
-def list_templates() -> None:
-    """List the templates that `init` will write."""
-    for relative, _ in iter_template_files():
-        typer.echo(str(relative))
 
 
 @app.command()

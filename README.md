@@ -79,7 +79,6 @@ That command reads your repo (package files, build config, README, branch state)
 
 ```
 sellier init [PATH]    # default: current directory; --force to overwrite
-sellier list           # list every file `init` will write
 sellier version        # print installed version
 sellier --help
 ```
