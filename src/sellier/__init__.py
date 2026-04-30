@@ -1,3 +1,3 @@
-"""sellier — scaffold a Claude Code agent harness into any project."""
+"""sellier — scaffold a Claude Code agent project harness into any project."""
 
 __version__ = "0.1.2"

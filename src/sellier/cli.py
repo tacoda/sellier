@@ -14,7 +14,7 @@ from sellier.scaffolder import (
 
 app = typer.Typer(
     add_completion=False,
-    help="Scaffold a Claude Code agent harness into any project.",
+    help="Scaffold a Claude Code agent project harness into any project.",
     no_args_is_help=True,
 )
 

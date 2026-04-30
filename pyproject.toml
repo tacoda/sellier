@@ -1,7 +1,7 @@
 [project]
 name = "sellier"
 version = "0.1.2"
-description = "Scaffold a Claude Code agent harness into any project"
+description = "Scaffold a Claude Code agent project harness into any project"
 readme = "README.md"
 requires-python = ">=3.14"
 license = { text = "MIT" }

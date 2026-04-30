@@ -1,6 +1,6 @@
 # sellier
 
-Scaffold a Claude Code agent harness into any project.
+Scaffold a Claude Code agent project harness into any project.
 
 A **harness** is the system that lets an AI coding agent produce correct, high-quality code consistently. It is four things working together:
 

@@ -4,7 +4,7 @@ Guidance for Claude Code when working in **sellier**.
 
 ## Project Overview
 
-A Python CLI that scaffolds a Claude Code agent harness into any project. The `templates/` tree is the deliverable; `cli.py` and `scaffolder.py` are thin wrappers around copying it.
+A Python CLI that scaffolds a Claude Code agent project harness into any project. The `templates/` tree is the deliverable; `cli.py` and `scaffolder.py` are thin wrappers around copying it.
 
 **Tech Stack:** Python 3.14, uv, typer, pytest, hatchling
 
