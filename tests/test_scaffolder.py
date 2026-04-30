@@ -74,28 +74,6 @@ def test_scaffolded_files_match_template_bytes(tmp_path: Path) -> None:
         assert scaffolded.read_bytes() == source.read_bytes(), relative
 
 
-def test_dup_writes_to_claude_candidate_and_skips_claude_md(tmp_path: Path) -> None:
-    scaffold_harness(tmp_path, dup=True)
-
-    candidate = tmp_path / ".claude-candidate"
-    assert (candidate / "settings.json").is_file()
-    assert (candidate / "commands").is_dir()
-    assert not (tmp_path / ".claude").exists()
-    assert not (tmp_path / "CLAUDE.md").exists()
-
-
-def test_dup_overwrites_existing_candidate_folder(tmp_path: Path) -> None:
-    candidate = tmp_path / ".claude-candidate"
-    candidate.mkdir()
-    stale = candidate / "stale.txt"
-    stale.write_text("stale")
-
-    scaffold_harness(tmp_path, dup=True)
-
-    assert not stale.exists()
-    assert (candidate / "settings.json").is_file()
-
-
 def test_clean_removes_extra_files_in_claude_dir(tmp_path: Path) -> None:
     claude_dir = tmp_path / ".claude"
     claude_dir.mkdir()
@@ -115,12 +93,3 @@ def test_clean_bypasses_existence_check(tmp_path: Path) -> None:
     scaffold_harness(tmp_path, clean=True)
 
     assert (tmp_path / "CLAUDE.md").read_text() != "existing"
-
-
-def test_dup_ignores_existing_harness_without_force(tmp_path: Path) -> None:
-    (tmp_path / "CLAUDE.md").write_text("existing")
-
-    scaffold_harness(tmp_path, dup=True)
-
-    assert (tmp_path / "CLAUDE.md").read_text() == "existing"
-    assert (tmp_path / ".claude-candidate" / "settings.json").is_file()

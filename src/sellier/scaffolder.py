@@ -12,7 +12,6 @@ _PACKAGE = "sellier"
 _TEMPLATES_DIR = "templates"
 _HARNESS_MARKERS = ("CLAUDE.md", ".claude")
 _CLAUDE_DIR = ".claude"
-_CLAUDE_CANDIDATE_DIR = ".claude-candidate"
 
 
 class HarnessAlreadyExistsError(FileExistsError):
@@ -41,44 +40,32 @@ def scaffold_harness(
     target: Path,
     *,
     force: bool = False,
-    dup: bool = False,
     clean: bool = False,
 ) -> list[Path]:
     """Copy the harness into ``target``.
 
     Returns the list of files written, relative to ``target``.
     Raises ``HarnessAlreadyExistsError`` if the target already has harness files
-    and none of ``force``, ``dup``, or ``clean`` is set.
-
-    When ``dup`` is set, the ``.claude/`` config is written to
-    ``.claude-candidate/`` instead, overwriting any existing candidate folder.
+    and neither ``force`` nor ``clean`` is set.
 
     When ``clean`` is set, the existing ``.claude/`` directory at the target is
     removed before writing, so the result matches the templates exactly.
     """
     target = Path(target)
-    if not force and not dup and not clean and _harness_exists(target):
+    if not force and not clean and _harness_exists(target):
         raise HarnessAlreadyExistsError(
             f"{target} already contains a harness; pass force=True to overwrite"
         )
 
     target.mkdir(parents=True, exist_ok=True)
 
-    if dup:
-        candidate_root = target / _CLAUDE_CANDIDATE_DIR
-        if candidate_root.exists():
-            shutil.rmtree(candidate_root)
-    elif clean:
+    if clean:
         claude_root = target / _CLAUDE_DIR
         if claude_root.exists():
             shutil.rmtree(claude_root)
 
     written: list[Path] = []
     for relative, source in iter_template_files():
-        if dup and relative.parts and relative.parts[0] == _CLAUDE_DIR:
-            relative = Path(_CLAUDE_CANDIDATE_DIR, *relative.parts[1:])
-        elif dup:
-            continue
         destination = target / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
         with resources.as_file(source) as concrete_source:

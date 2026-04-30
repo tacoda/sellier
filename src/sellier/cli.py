@@ -37,24 +37,16 @@ def init(
         "--clean",
         help="Remove the existing .claude/ directory before writing so the result matches the templates exactly.",
     ),
-    dup: bool = typer.Option(
-        False,
-        "--dup",
-        help="Write the .claude/ config to .claude-candidate/ for local testing; overwrites it if present.",
-    ),
 ) -> None:
     """Scaffold CLAUDE.md and .claude/ into TARGET."""
     try:
-        written = scaffold_harness(target, force=force, dup=dup, clean=clean)
+        written = scaffold_harness(target, force=force, clean=clean)
     except HarnessAlreadyExistsError as error:
         typer.secho(str(error), err=True, fg=typer.colors.RED)
         raise typer.Exit(code=1) from error
 
     typer.echo(f"Wrote {len(written)} file(s) to {target}.")
-    if dup:
-        typer.echo("Candidate config written to .claude-candidate/.")
-    else:
-        typer.echo("Next: open the project in Claude Code and run `/saddle-up`.")
+    typer.echo("Next: open the project in Claude Code and run `/saddle-up`.")
 
 
 @app.command(name="list")
