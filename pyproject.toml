@@ -29,6 +29,7 @@ Issues = "https://github.com/tacoda/sellier/issues"
 [dependency-groups]
 dev = [
     "pytest>=8",
+    "ruff>=0.15.12",
 ]
 
 [build-system]
